@@ -34,12 +34,31 @@ app.use(function (req, res, next) {
 //     last_completed_date: Date
 // });
 
+app.get ('/', function (req, res){
+    res.send('Time Detective API server')
+});
+
+
 // ** HABITS ** //
-// Get all habits 
-app.get('/api', function (req, res) {
+// Get all 
+app.get('/api/items', function (req, res) {
+
+    items = [];
+    
+    items = [
+        {
+            name: 'test',
+            age: 50
+        }, 
+        {
+            name: 'test2',
+            age: 48
+        } 
+    ];
 
     console.log("connected to api root ...");
-    res.send('api root')
+    //res.send('api root')
+    res.json(items)
 
     // //use mongoose to get data from the database
     // Habit.find(function (err, habits) {
@@ -229,5 +248,5 @@ app.get('/api', function (req, res) {
 
 
 // Start app and listen on port 8080  
-app.listen(process.env.PORT || 8080);
-console.log("Time Detective API server listening on port  - ", (process.env.PORT || 8080));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, console.log(`Server started on port ${PORT}`));
