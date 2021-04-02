@@ -2,10 +2,10 @@
 var express = require('express');
 var app = express();
 //var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var cors = require('cors');
-const { pool } = require("./db");
+const db = require('./queries')
 
 // Configuration
 //mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/MyHabitStacker");
@@ -25,10 +25,21 @@ app.use(function (req, res, next) {
 });
 
 // Connect to Postgres
-pool
-  .connect()
-  .then(() => console.log("Postgres connected ..."))
-  .catch((err) => console.log(err));
+// pool
+//   .connect()
+//   .then(() => console.log("Postgres connected ..."))
+//   .catch((err) => console.log(err));
+
+//   pool.query("SELECT * FROM items", (err, res) => {
+//     if (err) {
+//       console.log("pg returned an error");
+//       throw error;
+//     }
+//     if (res) {
+//       console.log("pg returned a result from the SQL query");
+//     }
+//   });
+
 
 // Models
 // var Item = mongoose.model('Item', {
@@ -42,9 +53,9 @@ pool
 //     last_completed_date: Date
 // });
 
-app.get ('/', function (req, res){
-    res.send('Time Detective API server')
-});
+app.get('/', (request, response) => {
+    response.json({ info: 'Node.js, Express, and Postgres API server' })
+  })
 
 
 // app.get('/', function(req, res) {
@@ -54,7 +65,9 @@ app.get ('/', function (req, res){
 
 // ** HABITS ** //
 // Get all 
-app.get('/api/items', function (req, res) {
+app.get('/api/items', db.getAllItems)
+
+// app.get('/api/items', function (req, res) {
 
     // items = [];
     
@@ -68,10 +81,18 @@ app.get('/api/items', function (req, res) {
     //         age: 48
     //     } 
     // ];
+    
 
-    console.log("connected to api root ...");
-    //res.send('api root')
-    res.json(items)
+    // pool.query('SELECT * FROM items', (err, result) => {
+    //     if (err) {
+    //       return console.error('Error executing query', err.stack)
+    //     }
+    //     items=result.rows;
+    //     console.log(result.rows)
+    //   })
+
+    // console.log("get request ...");
+    // res.json(items)
 
     // pg.connect(connectionString, function(err, client, done) {
     //     client.query('SELECT * FROM your_table', function(err, result) {
@@ -91,7 +112,7 @@ app.get('/api/items', function (req, res) {
 
     //     res.json(habits); // return all habits in JSON format
     // });
-});
+// });
 
 // // Get one habit
 // app.get('/api/habits/:id', function (req, res) {
