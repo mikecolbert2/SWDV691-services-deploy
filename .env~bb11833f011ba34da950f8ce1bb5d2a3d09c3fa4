@@ -1,5 +1,0 @@
-DB_USER = whyjnokydpzjbh
-DB_PASSWORD = 37867f2b1eab9083720ef8ccd9b98ff9ce4accb43893843181ee66e03169ddeb
-DB_HOST = ec2-3-91-127-228.compute-1.amazonaws.com
-DB_PORT = 5432
-DB_DATABASE = dde0r75jqai4n4
