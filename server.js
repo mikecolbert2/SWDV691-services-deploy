@@ -56,18 +56,18 @@ app.get ('/', function (req, res){
 // Get all 
 app.get('/api/items', function (req, res) {
 
-    items = [];
+    // items = [];
     
-    items = [
-        {
-            name: 'test',
-            age: 50
-        }, 
-        {
-            name: 'test2',
-            age: 48
-        } 
-    ];
+    // items = [
+    //     {
+    //         name: 'test',
+    //         age: 50
+    //     }, 
+    //     {
+    //         name: 'test2',
+    //         age: 48
+    //     } 
+    // ];
 
     console.log("connected to api root ...");
     //res.send('api root')
