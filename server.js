@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var cors = require('cors');
+const { pool } = require("./db");
 
 // Configuration
 //mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/MyHabitStacker");
@@ -23,10 +24,17 @@ app.use(function (req, res, next) {
     next();
 });
 
+// Connect to Postgres
+pool
+  .connect()
+  .then(() => console.log("Postgres connected ..."))
+  .catch((err) => console.log(err));
+
 // Models
-// var Habit = mongoose.model('Habit', {
-//     habit_name: String,
-//     start_date: Date
+// var Item = mongoose.model('Item', {
+//     item_id: Number,
+//     item_name: String,
+//     item_age: Number
 // });
 
 // var Log = mongoose.model('DailyLog', {
@@ -37,6 +45,11 @@ app.use(function (req, res, next) {
 app.get ('/', function (req, res){
     res.send('Time Detective API server')
 });
+
+
+// app.get('/', function(req, res) {
+//     res.sendFile(path.join(__dirname + '/index.html'));
+//   });
 
 
 // ** HABITS ** //
@@ -59,6 +72,15 @@ app.get('/api/items', function (req, res) {
     console.log("connected to api root ...");
     //res.send('api root')
     res.json(items)
+
+    // pg.connect(connectionString, function(err, client, done) {
+    //     client.query('SELECT * FROM your_table', function(err, result) {
+    //        done();
+    //        if(err) return console.error(err);
+    //        console.log(result.rows);
+    //     });
+    //  });
+
 
     // //use mongoose to get data from the database
     // Habit.find(function (err, habits) {
