@@ -25,7 +25,11 @@ const getAllItems = (request, response) => {
   // ** ADMIN ** //
 
   const getAllUsers = (request, response) => {
-    pool.query('SELECT first_name, last_name, email, password, role_id, date_created, last_login FROM users ORDER BY last_name ASC, first_name ASC;', (error, results) => {
+    pool.query(`SELECT users.first_name, users.last_name, users.email, users.password, 
+                roles.role_name, users.date_created, users.last_login 
+                FROM users 
+                INNER JOIN roles ON users.role_id = roles.role_id 
+                ORDER BY users.last_name ASC, users.first_name ASC;`, (error, results) => {
       if (error) {
         throw error
       }
@@ -34,7 +38,8 @@ const getAllItems = (request, response) => {
   }
 
   module.exports = {
-    getAllItems
+    getAllItems,
+    getAllUsers
   }
 
 
