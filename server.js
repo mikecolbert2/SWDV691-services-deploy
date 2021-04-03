@@ -1,14 +1,10 @@
 // Set up
-var express = require('express');
-var app = express();
-//var mongoose = require('mongoose');
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var cors = require('cors');
+const methodOverride = require('method-override');
+const cors = require('cors');
 const db = require('./queries')
-
-// Configuration
-//mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/MyHabitStacker");
 
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
