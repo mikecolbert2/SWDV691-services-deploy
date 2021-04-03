@@ -20,6 +20,19 @@ const getAllItems = (request, response) => {
     })
   }
 
+
+
+  // ** ADMIN ** //
+
+  const getAllUsers = (request, response) => {
+    pool.query('SELECT first_name, last_name, email, password, role_id, date_created, last_login FROM users ORDER BY last_name ASC, first_name ASC;', (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).json(results.rows)
+    })
+  }
+
   module.exports = {
     getAllItems
   }

@@ -33,6 +33,13 @@ app.get('/api/items', db.getAllItems)
 
 
 
+
+// ** ADMIN ** //
+
+// get all users
+app.get('/api/admin/users', db.getAllUsers)
+
+
 // Start app and listen on port 8080  
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
