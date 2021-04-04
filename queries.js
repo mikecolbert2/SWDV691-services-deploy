@@ -10,9 +10,11 @@ const pool = new Pool({
     ssl:{ rejectUnauthorized: false }
 });
 
+// ** Accounts & Authentication ** //
+
 
 const getAllItems = (request, response) => {
-    pool.query('SELECT * FROM items ORDER BY item_name ASC', (error, results) => {
+    pool.query(`SELECT * FROM items ORDER BY item_name ASC`, (error, results) => {
       if (error) {
         throw error
       }
@@ -22,7 +24,7 @@ const getAllItems = (request, response) => {
 
 
 
-  // ** ADMIN ** //
+  // ** Admin ** //
 
   const getAllUsers = (request, response) => {
     pool.query(`SELECT users.first_name, users.last_name, users.email, users.password, 
